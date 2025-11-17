@@ -1,25 +1,48 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema pizzaria", "Sistema pizzaria\Sistema pizzaria.csproj", "{FFF30154-D363-411C-9A45-FF4361F023BD}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FFF30154-D363-411C-9A45-FF4361F023BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFF30154-D363-411C-9A45-FF4361F023BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFF30154-D363-411C-9A45-FF4361F023BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFF30154-D363-411C-9A45-FF4361F023BD}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {780C341C-A62A-4F6F-95C8-0C4B1E6E378E}
-	EndGlobalSection
-EndGlobal
+using System;
+
+class Program
+{
+    enum Tamanho { Pequeno = 1, Medio, Grande }
+    enum Sabor { Calabresa = 1, Chocolate, Margherita, FrangoCatupiry }
+
+    static void Main()
+    {
+        double precoPequeno = 20.59;
+        double precoMedio = 30.75;
+        double precoGrande = 40.00;
+
+        Console.WriteLine("Escolha o tamanho da pizza:");
+        foreach (var t in Enum.GetValues(typeof(Tamanho)))
+        {
+            Console.WriteLine($"{(int)t} - {t}");
+        }
+
+        int tamanhoEscolhido = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Escolha o sabor da pizza:");
+        foreach (var s in Enum.GetValues(typeof(Sabor)))
+        {
+            Console.WriteLine($"{(int)s} - {s}");
+        }
+
+        int saborEscolhido = int.Parse(Console.ReadLine());
+
+        double preco = 0;
+        switch ((Tamanho)tamanhoEscolhido)
+        {
+            case Tamanho.Pequeno:
+                preco = precoPequeno;
+                break;
+            case Tamanho.Medio:
+                preco = precoMedio;
+                break;
+            case Tamanho.Grande:
+                preco = precoGrande;
+                break;
+        }
+
+        Console.WriteLine($"Você escolheu uma pizza {((Tamanho)tamanhoEscolhido)} de sabor {((Sabor)saborEscolhido)} por R$ {preco:F2}");
+    }
+}
+
